@@ -1,0 +1,62 @@
+<main>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
+        <h2>User info</h2>
+        <%#= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+        <table class="table">
+          <tbody>
+            <tr>name</tr>
+            <tr><%= @user.name %></tr>
+          </tbody>
+          <tbody>
+            <tr>name</tr>
+            <tr><%= @user.name %></tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to "", users_path, class: 'btn btn-outline-secondary btn-block fas fa-user-cog edit_user_31580' %>
+        </div>
+        <h2 class="mt-3">New book</h2>
+        <%= form_with model:@book, local:true do |f| %>
+        <!--form_with model:インスタンス変数 do ||-->
+        <!--Railsは渡されたモデル(@blog)の中身が空であることから、createメソッドを呼び出すことを判断-->
+        <% if @book.errors.any? %>
+        <!--で全ての属性のうち１つでもエラーがあったかどうかをチェック-->
+          <div id="error_explanation">
+            <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+              <!--全ての属性に関するエラーメッセージを表示-->
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="index-new">
+          <div class="index-text-box">
+            <p>Title</p>
+            <%= f.text_field :title %>
+            <% if @book.errors.include?(:title) %>
+            <p style="color: red;"><%= @book.errors.full_messages_for(:title).first %>
+            <% end %>
+          </div>
+          <div class="index-text-box">   
+            <p>Opinion</p>
+            <%= f.text_area :body %>
+            <% if @book.errors.include?(:body) %>
+            <p style="color: red;"><%= @book.errors.full_messages_for(:body).first %>
+            <% end %>
+          </div>
+          <div class="index-text-box"> 
+            <p></p>
+            <%= f.submit 'Create Book', class="btn btn-success btn-sm btn-block sign_in"%>
+            <% end %>
+          </div>
+        </div>
+        
+        
+      </div> <!--左側のUser info-->
+    </div>
+  </div>
+</main>

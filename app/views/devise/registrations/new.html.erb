@@ -1,0 +1,54 @@
+<main>
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 collg-5 px-5 px-sm-0">
+
+        <h2>Sign up</h2>
+
+        <%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, autofocus: true, autocomplete: "name"  %>
+            <!--ページを読み込んだらすぐにautofocus属性を記述している部分にカーソルが移動して入力状態になる-->
+            
+          </div>
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <!--パスワード欄の自動入力を抑止したい場合に-->
+          </div>
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+          <br>
+          <div class="actions">
+            <%= f.submit "Sign up" , class: 'btn btn-success' %>
+            <!--この中に構文通りBootstrapの記述を入れてあげると変更がかかる-->
+            <!--class: '  'が公式の構文。：の後は半角とシングルクオテーションで括る-->
+  
+          </div>
+<%= render "devise/shared/links" %>
+<!--これが"Log in"リンク部分。shared内の_link.html.erbから引っ張ってきている-->
+<!--devise/shared/links内には他に使うlinkもたくさん自動で作られている（deviseの機能)-->
+
+    <% end %>
+      </div>
+    </div>
+  </div>
+</main>
+
