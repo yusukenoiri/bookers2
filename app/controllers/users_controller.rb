@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   # Application contorollerを継承している
   # Applicationコントローラーも読み込まれる
-  
+
   # before_action :authenticate_user!
   # before_action :authenticate_user!, only: [:show]とかにもできる
+
+  before_action :current_user, only: [:edit]
 
   def new
     @user = User.new
@@ -17,14 +19,14 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.id)
     # saveしてusers.showへ
     else
-      render '/'
+      render 'index'
       # render :アクション名で、同じコントローラ内の別アクションのViewを表示
       # renderはコントローラーを通さない,renderされた後にindex.htmlにいく、if error文に引っかかり表示される
     end
   end
 
   def index
-    
+
     @user = User.find(current_user.id)
     # @user = User.find(params[:id])
     @users = User.all
@@ -38,14 +40,25 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # ユーザのデータを1件取得し、インスタンス変数へ渡す
     @book = Book.new
-    @books = Book.all
+    @books = @user.books
+
   end
 
   def destroy
   end
 
+  # def edit
+  # end
   def edit
-    @user = User.find(params[:id])
+    if params[:id].to_i == current_user.id
+      @user = User.find(params[:id])
+      render 'edit'
+    else
+      @book = Book.new
+      @books = Book.all
+      @user = current_user
+      render 'show'
+    end
   end
 
   def update
@@ -59,6 +72,7 @@ class UsersController < ApplicationController
     render 'edit'
     end
   end
+
   # def update
   #   @user = User.find(params[:id])
   #   if @user.update(user_params)
@@ -74,5 +88,12 @@ class UsersController < ApplicationController
   # ストロングパラメータ
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
+  end
+
+  def correct_user
+    user = User.find(params[:id])
+    if current_user != user
+      redirect_to user_path(user.id)
+    end
   end
 end

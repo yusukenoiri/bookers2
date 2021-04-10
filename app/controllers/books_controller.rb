@@ -10,9 +10,13 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:user_id])
+    @book = Book.find_by(id: params[:id])
+    @user = User.find_by(id: @book.user_id)
+    # @book = Book.find(params[:id])
+    # @book = Book.find(current_user.id)
+    # @book = User.find(params[:id])
     # @user = User.find(params[:id])
-    @user = User.find(current_user.id)
+    # @user = User.find(current_user.id)
     @books =Book.all
   end
 
@@ -20,6 +24,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     # 投稿者(current_user.id)のid情報をBook投稿のuser_idコラムに入れて、ログインユーザをひも付ける
+    # current_userはdeviseのメソッド
     @user = User.find(current_user.id)
     if @book.save
     flash[:notice] = "You have created new book successfully."
@@ -35,6 +40,11 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    if @book.user == current_user
+      render "edit"
+    else
+      redirect_to books_path
+    end
     # newの場合インスタンスが空、editの場合すでにデータが入っている。それを判断するためにcontrollerを書き、
     # createアクションかupdateアクションに処理を引き継いでくれる
   end
@@ -69,11 +79,11 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body, :user_id)
   end
 
-  # def ensure_correct_user
-  #   @book = Book.find(params[:id])
-  #   unless @book.user == current_user
-  #   redirect_to user_path
-  #   end
-  # end
+  def ensure_correct_user
+    @book = Book.find(params[:id])
+    unless @book.user == current_user
+    redirect_to user_path
+    end
+  end
 
 end

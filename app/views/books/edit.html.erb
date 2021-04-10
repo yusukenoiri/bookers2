@@ -2,21 +2,27 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-        <h2>User info</h2>
+        <h2>Editing Book</h2>
         <%= form_with model:@book, local:true do |f| %>
+          <% if @book.errors.any? %>  
+            <div id="error_explanation">
+            <h2><%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:</h2>
+              <ul>
+              <% @book.errors.full_messages.each do |message| %>
+              <!--全ての属性に関するエラーメッセージを表示-->
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+            
           <div class="form-group">
-            <label for="inputTitle">Title</label><br>
+          <label for="inputTitle">Title</label><br>
             <%= f.text_field :title, autofocus: true, id:"inputName", placeholder:"名前"%>
-            <% if @book.errors.include?(:title) %>
-            <p style="color: red;"><%= @book.errors.full_messages_for(:title).first %>
-            <% end %>
           </div>
           <div class="form-group">
            <p>Opinion</p>
             <%= f.text_area :body %>
-            <% if @book.errors.include?(:body) %>
-            <p style="color: red;"><%= @book.errors.full_messages_for(:body).first %>
-            <% end %>
           </div>
           <div class="form-group">
             <%= f.submit "Update Book" %>
