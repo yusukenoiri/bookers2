@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_025308) do
     t.string "name"
     t.text "introduction"
     t.integer "profile_image_id"
+    # これをstring方にしたい、画像が表示されない
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

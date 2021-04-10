@@ -1,0 +1,36 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <h2>User info</h2>
+        <%= form_with model:@book, local:true do |f| %>
+          <div class="form-group">
+            <label for="inputTitle">Title</label><br>
+            <%= f.text_field :title, autofocus: true, id:"inputName", placeholder:"名前"%>
+            <% if @book.errors.include?(:title) %>
+            <p style="color: red;"><%= @book.errors.full_messages_for(:title).first %>
+            <% end %>
+          </div>
+          <div class="form-group">
+           <p>Opinion</p>
+            <%= f.text_area :body %>
+            <% if @book.errors.include?(:body) %>
+            <p style="color: red;"><%= @book.errors.full_messages_for(:body).first %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Update Book" %>
+          </div>
+          <p>
+            <%= link_to "Show", book_path(@book.id) %>
+            <!--idを持った変数を引数に渡すことで、正しいパスとなる-->
+            <span>|</span>
+            <%= link_to "Back", books_path %>
+            <!--methodをdestroyに変更することで削除でき、一覧画面に戻るpathとなる-->
+            <!--destroyアクションを使用して削除機能を実装しているが、使用するHTTPメソッドはdelete-->
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>
