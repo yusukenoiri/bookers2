@@ -4,7 +4,7 @@
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h2>User info</h2>
         <%= form_with model:@user, local:true do |f| %>
-          <% if @user.errors.any? %>  
+          <% if @user.errors.any? %>
             <div id="error_explanation">
             <h2><%= pluralize(@user.errors.count, "error") %> prohibited this obj from being saved:</h2>
               <ul>
@@ -14,8 +14,8 @@
               <% end %>
               </ul>
             </div>
-          <% end %>  
-              
+          <% end %>
+
           <div class="form-group">
             <label for="inputName">Name</label><br>
             <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
@@ -29,7 +29,7 @@
             <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"Introduction"%>
           </div>
           <div class="form-group">
-            <%= f.submit "Update User" %>
+            <%= f.submit "Update User", class: 'btn btn-secondary' %>
           </div>
         <% end %>
       </div>

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!,except: [:top, :about]
-  before_action :authenticate_user!,only:[:edit, :update, :destroy] 
+  # before_action :authenticate_user!,only:[:edit, :update, :destroy, :show] 
   # ログインユーザーだけがonly以下で記載したアクションを実行できる
+  # サインインしていない時なんでsignup画面に飛ぶの？？
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   # devise利用の機能（ユーザ登録、ログイン認証など）が使われる場合、その前にconfigure_permitted_parametersが実行される
@@ -22,6 +23,12 @@ class ApplicationController < ActionController::Base
   
   def after_sign_in_path_for(resource)
     user_path(current_user.id)
+    # 遷移先はshow.idなので、（）のcurrent_user.idを取ってくる作業をさすれないように！！
+    # signup = create => signin、なのでsigninだけ遷移先を設定すれば
+  end
+  
+  def after_sign_out_path_for(resource)
+    root_path
     # 遷移先はshow.idなので、（）のcurrent_user.idを取ってくる作業をさすれないように！！
     # signup = create => signin、なのでsigninだけ遷移先を設定すれば
   end

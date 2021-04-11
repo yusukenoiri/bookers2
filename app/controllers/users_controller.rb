@@ -57,7 +57,8 @@ class UsersController < ApplicationController
       @book = Book.new
       @books = Book.all
       @user = current_user
-      render 'show'
+      # render 'show'
+      redirect_to user_path(current_user)
     end
   end
 

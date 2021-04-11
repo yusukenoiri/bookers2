@@ -1,6 +1,4 @@
 class BooksController < ApplicationController
-  # before_action :authenticate_user!
-  before_action :authenticate_user!, only: [:show, :index, :create]
 
   def index
     @books = Book.all
@@ -10,7 +8,10 @@ class BooksController < ApplicationController
   end
 
   def show
+    # Perttern1
     @book = Book.find_by(id: params[:id])
+    @book_new = Book.new
+
     @user = User.find_by(id: @book.user_id)
     # @book = Book.find(params[:id])
     # @book = Book.find(current_user.id)
@@ -18,6 +19,7 @@ class BooksController < ApplicationController
     # @user = User.find(params[:id])
     # @user = User.find(current_user.id)
     @books =Book.all
+
   end
 
   def create
