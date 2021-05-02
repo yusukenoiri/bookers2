@@ -3,6 +3,7 @@
     <div class="col-md-3">
       <p class="text-success"><%= flash[:notice] %></p>
       <%= render 'books/list', user: @user, book: @book %>
+      <%= render 'books/userinfo', user: @user, book: @book %>
     </div>
 
     <div class="col-md-8 offset-md-1"><!--ここから右側のUser info-->
@@ -20,6 +21,17 @@
           <tr>
             <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no-image-icon-small.jpeg" %></td>
             <td><%= user.name %></td>
+            <td>フォロー数:<%= user.followers.count %></td>
+            <td>フォローワー数:<%= user.followeds.count %></td>
+            <td>
+              <% if current_user != user %>
+                <% if current_user.follower?(user) %>
+                    <p><%=link_to "フォロー外す", user_relationships_path(user.id), method: :delete %></p>
+                  <% else %>
+                    <p><%=link_to "フォローする", user_relationships_path(user.id), method: :post %></p>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= link_to "Show", user_path(user.id) %></td>
               <!--book.id or bookでidをとってくる-->
           </tr>
@@ -27,6 +39,5 @@
         </tbody>
       </table>
     </div>
-
   </div>
 </div>

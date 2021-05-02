@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-md-3">
       <p class="text-success"><%= flash[:notice] %></p>
-      <%= render 'books/list', user: @user, book: @book_new %>
+      <%= render 'books/list', user: @user, book: @book %>
+      <%= render 'books/userinfo', user: @user, book: @book %>
     </div>
 
     <div class="col-md-8 offset-md-1"><!--ここから右側のUser info-->
@@ -47,6 +48,7 @@
       </table>
       <table>
         <% @book.book_comments.each do |book_comment| %>
+        <%#= render 'layouts/errors', obj: @book.book_comments %>
         <tr>
           <div class="comments">
           <td>

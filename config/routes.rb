@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'relationships/create'
+  # get 'relationships/destroy'
   get 'favorites/create'
   get 'favorites/destroy'
   root to: 'home#top'
@@ -6,7 +8,14 @@ Rails.application.routes.draw do
 
   get 'home/about' => 'home#about'
 
-  resources :users
+  resources :users do
+    resource:relationships, only: [:create, :destroy]
+    get :followers, on: :member
+    get :followeds, on: :member
+    # memberメソッドを使うとユーザーidが含まれているURLを扱えるようになる??
+
+  end
+
   resources :books do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]

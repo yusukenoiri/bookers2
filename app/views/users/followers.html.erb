@@ -1,0 +1,27 @@
+<h1>Follower Users</h1>
+  <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <%# if user.present %>
+          <%# if user.empty? %>
+              <!--<p>ユーザーはいません</p>-->
+          <%# else %>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no-image-icon-small.jpeg" %></td>
+          <td><%= user.name %></td>
+          <td>フォロー数:<%= user.followers.count %></td>
+          <td>フォローワー数:<%= user.followeds.count %></td>
+          <td><%= link_to "Show", user_path(user.id) %></td>
+            <!--book.id or bookでidをとってくる-->
+        </tr>
+         <%# end %>
+        <% end %>
+      </tbody>
+  </table>

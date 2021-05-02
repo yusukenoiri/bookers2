@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     # @user = User.find(params[:id])
     @users = User.all
     @book = Book.new
+    @book
   # render "books/index"　bookコントローラーへの呼び出し？
   # 書いてない場合はrender user.indexが呼び出される
   end
@@ -84,6 +85,16 @@ class UsersController < ApplicationController
   #   render 'edit'
   #   end
   # end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+
+  def followeds
+    user = User.find(params[:id])
+    @users = user.followeds
+  end
 
   private
   # ストロングパラメータ
