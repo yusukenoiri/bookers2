@@ -19,6 +19,7 @@ class BooksController < ApplicationController
     # @user = User.find(params[:id])
     # @user = User.find(current_user.id)
     @books =Book.all
+    @book_comment = BookComment.new
 
   end
 
@@ -49,6 +50,10 @@ class BooksController < ApplicationController
     end
     # newの場合インスタンスが空、editの場合すでにデータが入っている。それを判断するためにcontrollerを書き、
     # createアクションかupdateアクションに処理を引き継いでくれる
+
+    # if @book.user != current_user.id
+    # redirect_to books_path, alert: "不正なアクセスです"
+    # end
   end
 
   def update

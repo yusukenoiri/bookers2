@@ -22,5 +22,6 @@ class User < ApplicationRecord
   # book.showで使っている,has_many :booksで定義しているのでいらない
   # whereだと2件以上のデータを取ってくる、findメソッドだと1つしか取れない
   # whereだと(以下に取りたい情報を定義できる)
-  
+  has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 end
