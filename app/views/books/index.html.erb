@@ -8,6 +8,18 @@
     </div>
 
     <div class="col-md-8 offset-md-1"><!--ここから右側のUser info-->
+　　<!--検索フォーム-->
+　　  <% if user_signed_in? %>
+        <%= form_tag(searchs_search_path, method: :get) do %>
+        <%#= form_tag('パス', 'オプション') do %>
+        <!--submitをクリックすることで、searchs_search_path（controller)に繋げる-->
+          <%= text_field_tag 'word' %>
+          <%= select_tag 'range', options_for_select([['---選択してください---',''], ['User', '1'], ['Book', '2']]) %>
+          <%= select_tag 'search', options_for_select([['前方一致', 'forword_match'], ['後方一致', 'backword_match'],['完全一致', 'perfect_match'], ['部分一致', 'partial_match']]) %>
+          <%= submit_tag '検索' %>
+        <% end %>
+      <% end %>
+
       <h1 class="index-head">Books</h1>
       <table class="table table-hover table-inverse">
         <thead>
@@ -52,6 +64,5 @@
         </tbody>
       </table>
     </div>
-
   </div>
 </div>

@@ -1,0 +1,65 @@
+<% if user_signed_in? %>
+<div class='search'>
+  <%= form_tag(searchs_search_path, method: :get) do %>
+    <%= text_field_tag 'word' %>
+    <%= select_tag 'range', options_for_select([['---選択してください---',''], ['User', '1'], ['Book', '2']]) %>
+    <%= select_tag 'search', options_for_select([['前方一致', 'forword_match'], ['後方一致', 'backword_match'],['完全一致', 'perfect_match'], ['部分一致', 'partial_match']]) %>
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>
+<% end %>
+
+<% if @range == '1' %>
+  <h2>Users search for "<%= @word %>"</h2>
+  <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Introduction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.each do |user| %>
+        <tr>
+          <td>
+            <%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+          </td>
+          <td><%= link_to user_path(user) do %>
+              <%= user.name %> <% end %>
+          </td>
+          <td><%= user.introduction %></td>
+        </tr>
+        <% end %>
+      </tbody>
+  </table>
+<% else %>
+
+ <h2>Books search for "<%= @word %>"</h2>
+ <!--"#{user.followers.count}"-->
+ <table class="table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+
+     <tbody>
+      <% @book.each do |book| %>
+      <tr>
+        <td>
+            <%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+        </td>
+        <td><%= link_to book_path(book) do %>
+            <%= book.title %> <% end %>
+        </td>
+        <td><%= book.body %></td>
+      </tr>
+      <% end %>
+    </tbody>
+
+ </table>
+
+ <% end %>
