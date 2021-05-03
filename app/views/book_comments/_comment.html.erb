@@ -1,0 +1,28 @@
+<table>
+  <% book.book_comments.each do |book_comment| %>
+  <%#= render 'layouts/errors', obj: @book.book_comments %>
+  <tr>
+    <div class="comments">
+    <td>
+      <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpeg"  %>
+    </td>
+    <td>
+      <%= book_comment.user.name %>
+       <!--attachment_image_tag 保存先インスタンス名, :保存先カラム名, :サイズ（横幅,高さ）, 画像拡張子, 代替画像-->
+    </td>
+    <td>
+      <%= book_comment.comment %>
+    </td>
+      <!--削除を表示-->
+    <td>
+     <% if book_comment.user == current_user %>
+      <div class="comment-delete">
+         <%=link_to "Destroy",book_book_comment_path(book_comment.book, book_comment), method: :delete ,class: 'btn btn-danger' %>
+        <!--book_commentからbookを特定する、book_comment.idもわたす。2つIDが必要-->
+        <% end %>
+      </div>
+    </td>
+  </div>
+  </tr>
+  <% end %>
+</table>
