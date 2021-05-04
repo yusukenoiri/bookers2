@@ -21,6 +21,28 @@
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
 
+          <!--住所機能追加-->
+          <div class="field">
+            <%= f.label :Postcode %><br />
+            <%= f.text_field :postcode, autocomplete: "postcode" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :Prefecture %><br />
+            <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: "選択してください" } %>
+          </div>
+
+          <div class="field">
+            <%= f.label :City %><br />
+            <%= f.text_field :address_city, autocomplete: "address_city" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :Street %><br />
+            <%= f.text_field :address_street, autocomplete: "address_street" %>
+          </div>
+          <!--ここまで-->
+
           <div class="field">
             <%= f.label :password %>
             <% if @minimum_password_length %>

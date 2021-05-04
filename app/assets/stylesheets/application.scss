@@ -13,9 +13,12 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
+// @import 'bootstrap-sprockets';
+@import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+// @import 'protospace';
+
 
 
 .like-btn {
