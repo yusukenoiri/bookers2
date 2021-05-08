@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>"><%= @user.name %> さんとのチャット</h2>
+            <table class="message table">
+              <thead>
+                <tr>
+                  <th style="text-align: left; font-size: 20px;"><%= current_user.name %>  さんから送信</th>
+                  <th style="text-align: right; font-size: 20px;"><%= @user.name %></th>
+                </tr>
+              </thead>
+              <tbody id="chatcomment">
+                  <% @chats.each do |chat| %>
+                   <%= render 'chats/chat', chat: chat%>
+                  <% end %>
+              </tbody>
+            </table>
+            <%= form_with model: @chat do |f| %>
+              <%= f.text_field :message %>
+              <%= f.submit "送信" ,class: 'btn btn-success'%>
+              <%= f.hidden_field :room_id %>
+            <% end %>
+        </div>
+    </div>
+</div>

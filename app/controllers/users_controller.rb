@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # user_paramsに投稿データtitleとbodyを渡す
     if @user.save
+    # NotificationMailer.complete_mail(@user).deliver_now
     flash[:notice] = "You have created new User successfully."
     redirect_to user_path(@user.id)
     # saveしてusers.showへ
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+
   end
 
   # def edit

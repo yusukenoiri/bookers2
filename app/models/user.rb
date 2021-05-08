@@ -73,5 +73,7 @@ class User < ApplicationRecord
   end
   # ~.prefecture_nameで都道府県名を参照出来る様にする。
   # 例) @user.prefecture_nameで該当ユーザーの住所(都道府県)を表示出来る。
-
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
 end

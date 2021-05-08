@@ -47,8 +47,11 @@
   </tbody>
 </table>
 
+<% if current_user != @user %>
+  <%= link_to 'chatを始める', chat_path(@user.id) %>
+<% end %>
+
 <% if current_user.id %>
     <!--ログインしたユーザが投稿した本人かどうかview内で表示を分ける記載-->
   <%= link_to "", edit_user_path(@user.id), class: 'btn btn-outline-secondary btn-block fas fa-user-cog edit_user_31580' %>
-
 <% end %>

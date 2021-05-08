@@ -76,3 +76,6 @@ gem 'html2slim' #既存のerbファイルをslimファイルに変換出来る�
 gem 'jp_prefecture'
 # gem 'bootstrap-sass'
 gem "jquery-ui-rails"
+gem 'whenever', require: false
+# require: falseとするのは、このGem自体がRailsアプリケーションに
+# 反映するものではなく、 ターミナル(言わばOS)に反映させるものだから

@@ -32,4 +32,13 @@ class Book < ApplicationRecord
              @book = Book.all
         end
     end
+
+    def self.create_test
+        Book.create(title: "test", body: "testtest", )
+    end
+    # クラスメソッドとは？
+    # ざっくりの認識では、クラス全体の中から何かを取り出す際に使用するもの
+    # 一つ一つのインスタンスには紐づいておらず、クラスに対して働きかけるメソッド、とも言い換えられる
+    # メソッドの呼び出しには、必ずレシーバが必要になり、クラスメソッドには、あらかじめレシーバとして
+    # self(自分自身のオブジェクト)が指定されているので、クラスから直接呼び出せる仕掛けになっている
 end
