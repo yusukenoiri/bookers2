@@ -1,24 +1,25 @@
-# README
+Name:BOOKERS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+App that you can share your favorite books and details.
+You can make a comment on, have a chat with another users, make a favorite on books, follows users etc.
 
-Things you may want to cover:
+## Feature
+Create your book with comment
+Create following function with other users
+Favorite book fanction
+Chat with other users function
 
-* Ruby version
+## Requirement/Installation
+ruby '2.6.3
+bootstrap, '~> 4.5'
+jquery-rails
+font-awesome-sass, '~> 5.13'
 
-* System dependencies
+## How to use this app
+Registor your name, email, home address
+Post your favorites books
+Have a chat, make comments etc
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Author
+[@yusukenoiri]
